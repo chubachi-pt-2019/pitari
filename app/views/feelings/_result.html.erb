@@ -1,0 +1,12 @@
+<div class="col-sm-9 col-sm-offset-3">
+    <h1><%= $title %>について</h1>
+    <h1>現在の参加者: <%=($yes_count+$no_count) %></h1>
+</div>
+<div class="col-sm-3 col-sm-offset-3" style="text-align: left"><h3>賛成人数：<%= $yes_count %></h3></div>
+<div class="col-sm-6" style="text-align: right"><h3>反対人数：<%= $no_count %></h3></div>
+<div class="col-sm-9 col-sm-offset-3 mt-3">
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" aria-valuenow="<%=$yes_count %>" aria-valuemin="0" aria-valuemax="100" style="width: <%=$yes_count > 0 ? 100*$yes_count/($yes_count+$no_count) : 0 %>%;">
+        </div>
+    </div>
+</div>
