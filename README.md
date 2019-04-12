@@ -5,14 +5,19 @@ Pitari you can make quick decisions and shorten meeting times.
 
 ## Description
 
+TBD
+
 ## Demo
 
+TBD
+
 ## Requirement
+
+TBD
 
 ## Usage
 
 TODO : Add demo video
-
 
 ## Install
 
