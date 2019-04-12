@@ -11,7 +11,7 @@ Pitari you can make quick decisions and shorten meeting times.
 
 ## Usage
 
-TODL : Add demo video
+TODO : Add demo video
 
 
 ## Install
