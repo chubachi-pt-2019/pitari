@@ -1,24 +1,29 @@
-# README
+Name
+====
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pitari you can make quick decisions and shorten meeting times.
 
-Things you may want to cover:
+## Description
 
-* Ruby version
+## Demo
 
-* System dependencies
+## Requirement
 
-* Configuration
+## Usage
 
-* Database creation
+TODL : Add demo video
 
-* Database initialization
 
-* How to run the test suite
+## Install
 
-* Services (job queues, cache servers, search engines, etc.)
+For Docker
 
-* Deployment instructions
+```
+git clone https://github.com/chubachi-pt-2019/pitari.git
+cd pitari
+docker-compose up -d
+```
 
-* ...
+## License
+
+[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
