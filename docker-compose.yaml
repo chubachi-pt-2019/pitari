@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.2-alpine
+    environment:
+      - POSTGRES_PASSWORD=pitari
+      - POSTGRES_USER=pitari
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: always
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/usr/src/app
+    command: rails server -b 0.0.0.0
+
+volumes:
+  pgdata:
