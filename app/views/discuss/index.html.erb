@@ -1,1 +1,15 @@
-<h1>Discuss index page</h1>
+<input id="share-link" type='text' disabled value=<%= request.raw_host_with_port + '/user/new?dicuss_id=' + @discuss.id.to_s %>>
+<button onClick="copyShareLinkToClipboard()">copy</button>
+
+<script>
+    function copyShareLinkToClipboard() {
+        var targetElement = document.getElementById("share-link")
+        var tempElement = document.createElement("input");
+        tempElement.setAttribute("value", targetElement.value)
+        document.body.append(tempElement)
+        tempElement.select();
+        document.execCommand("copy")
+        document.body.removeChild(tempElement)
+        alert("link copied")
+    }
+</script>
