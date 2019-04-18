@@ -1,4 +1,4 @@
-FROM ruby:2.5.1
+FROM ruby:2.6.3
 ENV LANG C.UTF-8
 WORKDIR /tmp
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - && \
