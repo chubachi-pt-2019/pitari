@@ -1,3 +1,46 @@
 // Place all the styles related to the discuss controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.my-3 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#link-share-container {
+    top: 0;
+    position: absolute;
+    height: 10vh;
+    padding: 1vw;
+}
+
+#conversation-container {
+    top: 10vh;
+    bottom: 20vh;
+    position: absolute;
+    height: 70vh;
+}
+
+#users-container {
+    bottom: 0;
+    position: absolute;
+    height: 20vh;
+}
+
+.has-border {
+    border: 1px solid black;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.half-height {
+    height: 49.5%;
+}
+
+.content-center {
+    text-align: center;
+}

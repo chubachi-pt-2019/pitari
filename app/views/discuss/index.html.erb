@@ -1,5 +1,57 @@
-<input id="share-link" type='text' disabled value=<%= request.raw_host_with_port + '/user/new?dicuss_id=' + @discuss.id.to_s %>>
-<button onClick="copyShareLinkToClipboard()">copy</button>
+<div id="link-share-container" class="col-lg-12">
+    <div class="col-sm-5 col-sm-offset-1">
+        <div class="input-group">
+            <input id="share-link" type="text" class="form-control" disabled value=<%= request.raw_host_with_port + '/user/new?dicuss_id=' + @discuss.id.to_s%>>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onClick="copyShareLinkToClipboard()">Copy</button>
+            </span>
+        </div>
+    </div>
+</div>
+<div id="conversation-container" class="col-lg-12 has-border">
+    <div class="col-sm-10 col-sm-offset-1 has-border full-height">
+        <div class="col-sm-9 full-height content-center">
+            <div class="col-sm-8 col-sm-offset-2 half-height">
+            <!--　TODO:リアルタイム更新　-->
+                <div class="col-sm-4 full-height has-border">
+                    <!--　TODO:発言者のアイコンと名前　-->
+                </div>
+                <div class="col-sm-8 full-height has-border">
+                    <!--　TODO:発言者の話題と態度　-->
+                </div>
+            </div>
+            <div class="col-sm-8 col-sm-offset-2 half-height">
+                <%= form_with do |f| %>
+                <!--　TODO:バックエンドとのやり取り　-->
+                    <div class="col-sm-12 my-3">
+                        <%=f.text_field :name, class: "form-control", placeholder: "言いたい話を..."%>
+                    </div>
+                    <div class="col-sm-6 my-3">
+                        <%= radio_button_tag(:age, true) %>
+                        <%= label_tag(:positive, "Yes") %>
+                    </div>
+                    <div class="col-sm-6 my-3">
+                        <%= radio_button_tag(:age, false) %>
+                        <%= label_tag(:negative, "No") %>
+                    </div>
+                    <div class="col-sm-12 my-3">
+                        <%= f.submit "発言", class: "btn btn-danger col-sm-4 col-sm-offset-4"%>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <div class="col-sm-3 full-height has-border">
+            <!--　TODO:議題履歴　-->
+        </div>
+    </div>
+</div>
+<div id="users-container" class="col-lg-12">
+    <!--　TODO:参加者リスト　-->
+    <!--　TODO:リアルタイム更新　-->
+    <div></div>
+</div>
+
+
 
 <script>
     function copyShareLinkToClipboard() {
