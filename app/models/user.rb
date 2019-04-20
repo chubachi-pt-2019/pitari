@@ -1,3 +1,4 @@
 class User < ApplicationRecord
-    has_many :agenda
+    belongs_to :discuss
+    has_many :agendas
 end
