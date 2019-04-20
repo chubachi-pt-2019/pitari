@@ -1,4 +1,4 @@
 class Discuss < ApplicationRecord
-    has_many :user
-    has_many :agenda, through: :user
+    has_many :users
+    has_many :agendas, through: :users
 end
