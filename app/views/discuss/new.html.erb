@@ -2,14 +2,24 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for @user ,url: new_path do |f| %>
+    <%= form_for @discuss ,url: discuss_path do |discuss_form| %>
+      <%= discuss_form.text_field :name, placeholder:'Meeting Name' %>
 
-        <%= f.label :name %>
-      <%= f.text_field :name %>
+       <%= discuss_form.fields_for :user do |user_form| %>
+       <%= user_form.text_field :name, placeholder:'User Name' %>
+      
+       <%= user_form.fields_for :agenda do |agenda_form| %>
+       <%= agenda_form.text_field :name, placeholder:'Agenda' %>
 
-     
 
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
+       <%= agenda_form.radio_button :opinion, "1" %>
+       <%= label_tag(:opinion_yes, "Positive") %>
+       <%= agenda_form.radio_button :opinion, "0" %>
+       <%= label_tag(:opinion_no, "Negative") %>
+       <% end %>
+     <% end %>
+        <%= discuss_form.submit "Create my account", class: "btn btn-primary" %>
+
     <% end %>
   </div>
 </div>
