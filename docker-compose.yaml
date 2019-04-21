@@ -6,6 +6,8 @@ services:
     environment:
       - POSTGRES_PASSWORD=pitari
       - POSTGRES_USER=pitari
+    ports:
+      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
@@ -16,9 +18,9 @@ services:
     ports:
       - 3000:3000
     volumes:
-#      - ./:/usr/src/app
-      - /rails/pitari:/usr/src/app
-    command: rails server -b 0.0.0.0
+      - ./:/usr/src/app
+      #- /rails/pitari:/usr/src/app
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" #rails server -b 0.0.0.0
 
 volumes:
   pgdata:
