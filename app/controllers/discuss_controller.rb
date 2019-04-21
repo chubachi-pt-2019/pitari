@@ -10,14 +10,30 @@ class DiscussController < ApplicationController
   end
 
   def create
-    Discuss.new(discuss_params).save
+
+    discuss = Discuss.new
+    discuss.name = discuss_params["name"]
+    discuss.save
+
+    user = User.new
+    user.name = discuss_params["user"]["name"]
+    user.discuss_id = discuss.id
+    user.save
+
+    agenda = Agenda.new
+    agenda.name = discuss_params["user"]["agenda"]["name"]
+    agenda.opinion = discuss_params["user"]["agenda"]["opinion"]
+    agenda.user_id = user.id
+    agenda.save
+
     render "show"
+
   end
   
   private
   
     def discuss_params
-      params.require(:discuss).permit(:name)
+      params.require(:discuss).permit(:name, {user: [:name, {agenda: [:name, :opinion]} ] } )
     end
 
     
