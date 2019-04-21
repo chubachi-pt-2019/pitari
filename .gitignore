@@ -28,3 +28,5 @@
 
 # Ignore docker-compose file
 /docker-compose.yaml
+
+/.idea/*
