@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <%= form_for @discuss ,url: discuss_path do |discuss_form| %>
+    <%= form_for @discuss , :url => {:action => 'create'}  do |discuss_form| %>
       <%= discuss_form.text_field :name, placeholder:'Meeting Name' %>
 
        <%= discuss_form.fields_for :user do |user_form| %>
