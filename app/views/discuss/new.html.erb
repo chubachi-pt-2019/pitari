@@ -3,7 +3,7 @@
 </div>
 <div class="col-md-12 meetings-new-form">
   <div class="col-md-4 col-md-offset-4 content-center">
-    <%= form_for @discuss ,url: discuss_path do |discuss_form| %>
+  <%= form_for @discuss , :url => {:action => 'create'}  do |discuss_form| %>
       <%= discuss_form.text_field :name, placeholder: 'Meeting Name', class: 'form-control my-3'%>
 
         <%= discuss_form.fields_for :user do |user_form| %>
