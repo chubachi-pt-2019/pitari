@@ -17,14 +17,14 @@ class DiscussController < ApplicationController
     @discuss.name = discuss_params["name"]
     if @discuss.save
     else
-      flash[:danger] = @discuss.errors.full_messages
+      flash.now[:danger] = @discuss.errors.full_messages
     end
 
     user = User.new(name: discuss_params["user"]["name"],
                     discuss_id: @discuss.id)
     if user.save
     else
-      flash[:danger] = user.errors.full_messages
+      flash.now[:danger] = user.errors.full_messages
     end
 
     agenda = Agenda.new(name:    discuss_params["user"]["agenda"]["name"],
@@ -33,7 +33,7 @@ class DiscussController < ApplicationController
     if agenda.save
       redirect_to @discuss
     else
-      flash[:danger] = agenda.errors.full_messages
+      flash.now[:danger] = agenda.errors.full_messages
       render :new
     end
   end
