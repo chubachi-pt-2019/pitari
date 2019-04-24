@@ -16,7 +16,7 @@ services:
     ports:
       - 3000:3000
     volumes:
-#      - ./:/usr/src/app
+      # - ./:/usr/src/app
       - /rails/pitari:/usr/src/app
     command: rails server -b 0.0.0.0
 
