@@ -4,6 +4,10 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.container-fluid {
+    padding: 0;
+}
+
 .my-3 {
     margin-top: 15px;
     margin-bottom: 15px;

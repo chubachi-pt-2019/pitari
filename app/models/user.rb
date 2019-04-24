@@ -1,4 +1,5 @@
 class User < ApplicationRecord
-    belongs_to :discuss
-    has_many :agendas
+  validates :name, presence: true
+  belongs_to :discuss
+  has_many :agendas
 end
