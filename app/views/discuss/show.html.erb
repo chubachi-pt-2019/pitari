@@ -16,40 +16,41 @@
                 <div class="col-sm-4 full-height speaking-user">
                     <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
                     <!--　TODO:発言者の名前　-->
-                    <h3>username</h3>
+                    <h3 id="user-name-display"><%=@user.name %></h3>
                 </div>
                 <div class="col-sm-8 full-height">
                     <!--　TODO:発言者の話題と態度　-->
                     <div class="col-sm-12 agenda-name half-height speaking-agenda-name">
-                        <h4> agenda name </h4>
+                        <h4 id="agenda-name-display"><%=@discuss.agendas.last.name %></h4>
                     </div>
                     <div class="col-sm-12 agenda-opinion half-height">
-                        <% if true %>
-                            <%= image_tag("iine.svg", class: "speaking-agenda-opinion") %>
+                        <% if @discuss.agendas.first.opinion %>
+                            <%= image_tag("iine.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-positive") %>
+                            <%= image_tag("yokunai.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-negative", style: "display:none") %>
                         <% else %>
-                            <%= image_tag("yokunai.svg", class: "speaking-agenda-opinion") %>
+                            <%= image_tag("iine.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-positive", style: "display:none") %>
+                            <%= image_tag("yokunai.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-negative") %>
                         <% end %>
                     </div>
                 </div>
             </div>
             <div id="speak-div" class="col-sm-8 col-sm-offset-2 half-height">
-                <%= form_with do |f| %>
+                <%= hidden_field_tag :user_id, @user.id %>
                 <!--　TODO:バックエンドとのやり取り　-->
-                    <div class="col-sm-12 my-3">
-                        <%=f.text_field :name, class: "form-control", placeholder: "something to say..."%>
-                    </div>
-                    <div class="col-sm-6 my-3">
-                        <%= radio_button_tag(:opinion, "1") %>
-                        <%= label_tag(:positive, "positive", for: "opinion_1") %>
-                    </div>
-                    <div class="col-sm-6 my-3">
-                        <%= radio_button_tag(:opinion, "0") %>
-                        <%= label_tag(:negative, "negative", for: "opinion_0") %>
-                    </div>
-                    <div class="col-sm-12 my-3">
-                        <%= f.submit "発言", class: "btn btn-danger col-sm-4 col-sm-offset-4"%>
-                    </div>
-                <% end %>
+                <div class="col-sm-12 my-3">
+                <%=text_field_tag :agenda_name, nil, class: "form-control", placeholder: "something to say..."%>
+                </div>
+                <div class="col-sm-6 my-3">
+                    <%= radio_button_tag(:agenda_opinion, "1") %>
+                    <%= label_tag(:positive, "positive", for: "agenda_opinion_1") %>
+                </div>
+                <div class="col-sm-6 my-3">
+                    <%= radio_button_tag(:agenda_opinion, "0") %>
+                    <%= label_tag(:negative, "negative", for: "agenda_opinion_0") %>
+                </div>
+                <div class="col-sm-12 my-3">
+                    <%= button_tag "発言", class: "btn btn-danger col-sm-4 col-sm-offset-4", id: "user-speak"%>
+                </div>
             </div>
         </div>
         <div class="col-sm-3 full-height">
