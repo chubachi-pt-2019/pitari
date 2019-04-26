@@ -24,7 +24,7 @@
                         <h4 id="agenda-name-display"><%=@discuss.agendas.last.name %></h4>
                     </div>
                     <div class="col-sm-12 agenda-opinion half-height">
-                        <% if @discuss.agendas.first.opinion %>
+                        <% if @discuss.agendas.last.opinion %>
                             <%= image_tag("iine.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-positive") %>
                             <%= image_tag("yokunai.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-negative", style: "display:none") %>
                         <% else %>
