@@ -3,14 +3,11 @@ class DiscussController < ApplicationController
   def index
   end
   def show
-    puts session[:user_id]
     if session[:user_id]
       @discuss = Discuss.find(params[:id])
-      @user = @discuss.users.first
     else
       redirect_to root_path
     end
-      
   end
 
   def new

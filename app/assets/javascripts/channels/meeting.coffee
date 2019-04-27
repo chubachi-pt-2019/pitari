@@ -7,7 +7,6 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
 
   received: (data) ->
     # Called when there's incoming data on the websocket for this channel
-    console.log data
     $("#user-name-display").text(data.user.name)
     $("#agenda-name-display").text(data.agenda.name)
     opinion = data.agenda.opinion
@@ -20,10 +19,10 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
     
 
 
-  speak: (agenda_name, agenda_opinion, user_id) ->
-    @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion, user_id: user_id
+  speak: (agenda_name, agenda_opinion) ->
+    @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
 
 $(document).ready () ->
   $("#user-speak").on 'click', () ->
-    App.meeting.speak($("input[name='agenda_name']").val(), $("input[name='agenda_opinion']:checked").val(), $("input[name='user_id']").val())
+    App.meeting.speak($("input[name='agenda_name']").val(), $("input[name='agenda_opinion']:checked").val())
     $("input[name='agenda_name']").val('')

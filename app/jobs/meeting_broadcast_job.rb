@@ -4,6 +4,6 @@ class MeetingBroadcastJob < ApplicationJob
   def perform(agenda)
     # Do something later
     user = User.find(agenda.user_id)
-    ActionCable.server.broadcast 'meeting_channel', agenda: agenda, user: user
+    ActionCable.server.broadcast "meeting_#{user.discuss_id}", agenda: agenda, user: user
   end
 end

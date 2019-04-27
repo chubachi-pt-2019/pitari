@@ -16,7 +16,7 @@
                 <div class="col-sm-4 full-height speaking-user">
                     <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
                     <!--　TODO:発言者の名前　-->
-                    <h3 id="user-name-display"><%=@user.name %></h3>
+                    <h3 id="user-name-display"><%=@discuss.users.first.name %></h3>
                 </div>
                 <div class="col-sm-8 full-height">
                     <!--　TODO:発言者の話題と態度　-->
@@ -35,7 +35,6 @@
                 </div>
             </div>
             <div id="speak-div" class="col-sm-8 col-sm-offset-2 half-height">
-                <%= hidden_field_tag :user_id, @user.id %>
                 <!--　TODO:バックエンドとのやり取り　-->
                 <div class="col-sm-12 my-3">
                 <%=text_field_tag :agenda_name, nil, class: "form-control", placeholder: "something to say..."%>
