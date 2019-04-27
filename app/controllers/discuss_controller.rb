@@ -3,7 +3,11 @@ class DiscussController < ApplicationController
   def index
   end
   def show
-    @discuss = Discuss.find(params[:id])
+    if session[:user_id]
+      @discuss = Discuss.find(params[:id])
+    else
+      redirect_to root_path
+    end
   end
 
   def new
@@ -26,7 +30,7 @@ class DiscussController < ApplicationController
     else
       flash.now[:danger] = user.errors.full_messages
     end
-
+    session[:user_id] = user.id
     agenda = Agenda.new(name:    discuss_params["user"]["agenda"]["name"],
                         opinion: discuss_params["user"]["agenda"]["opinion"],
                         user_id: user.id)
