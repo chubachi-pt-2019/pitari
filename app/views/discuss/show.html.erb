@@ -16,15 +16,15 @@
                 <div class="col-sm-4 full-height speaking-user">
                     <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
                     <!--　TODO:発言者の名前　-->
-                    <h3>username</h3>
+                    <h3><%= @discuss.users.first.name%> </h3>
                 </div>
                 <div class="col-sm-8 full-height">
                     <!--　TODO:発言者の話題と態度　-->
                     <div class="col-sm-12 agenda-name half-height speaking-agenda-name">
-                        <h4> agenda name </h4>
+                        <h4> <%= @discuss.agendas.last.name%> </h4>
                     </div>
                     <div class="col-sm-12 agenda-opinion half-height">
-                        <% if true %>
+                        <% if @discuss.agendas.last.opinion %>
                             <%= image_tag("iine.svg", class: "speaking-agenda-opinion") %>
                         <% else %>
                             <%= image_tag("yokunai.svg", class: "speaking-agenda-opinion") %>
