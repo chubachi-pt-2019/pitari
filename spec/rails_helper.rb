@@ -30,6 +30,34 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
+DEFAULT_HOST = 'app.local'
+DEFAULT_PORT = 3001
+
+if ENV["LAUNCH_BROWSER"]
+  Capybara.configure do |config|
+    config.server_host = DEFAULT_HOST
+    config.server_port = DEFAULT_PORT
+    config.app_host = "http://#{DEFAULT_HOST}:#{DEFAULT_PORT}"
+    config.javascript_driver = :selenium_chrome_headless
+  end
+
+  Capybara.register_driver :selenium_chrome_headless do |app|
+    Capybara::Selenium::Driver.new(
+      app,
+      browser: :remote,
+      desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+        chromeOptions: {
+          args: [
+            "window-size=1024,768",
+          ]
+        }
+      ),
+      url: "http://chrome.local:4444/wd/hub",
+    )
+  end
+end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
