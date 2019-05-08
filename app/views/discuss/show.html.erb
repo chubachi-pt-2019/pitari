@@ -1,7 +1,7 @@
 <div id="link-share-container">
     <div class="col-sm-5 col-sm-offset-1">
         <div class="input-group">
-            <input id="share-link" type="text" class="form-control" disabled value=<%= request.raw_host_with_port + '/user/new?dicuss_id=' + @discuss.id.to_s%>>
+            <input id="share-link" type="text" class="form-control" disabled value=<%= request.raw_host_with_port + '/users/new?discuss_id=' + @discuss.id.to_s%>>
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button" onClick="copyShareLinkToClipboard()">Copy</button>
             </span>
