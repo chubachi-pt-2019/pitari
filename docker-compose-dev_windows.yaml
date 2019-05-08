@@ -20,13 +20,23 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./:/usr/src/app
+      - /rails/pitari:/usr/src/app
     command: rails server -b 0.0.0.0
     restart: always
     networks:
       pitari_dev:
         aliases:
           - app.local
+  chrome:
+    image: selenium/standalone-chrome-debug:3.141.0-actinium
+    ports:
+    - 4444:4444
+    - 5900:5900
+    restart: always
+    networks:
+      pitari_dev:
+        aliases:
+          - chrome.local
 
 volumes:
   pgdata:
