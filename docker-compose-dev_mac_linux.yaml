@@ -31,7 +31,7 @@ services:
     image: selenium/standalone-chrome-debug:3.141.0-actinium
     ports:
     - 4444:4444
-    - 59000:59000
+    - 59000:5900
     restart: always
     networks:
       pitari_dev:
