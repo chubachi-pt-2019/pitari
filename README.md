@@ -1,28 +1,3 @@
-# README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
 # Pitari
 
 ## Get start
@@ -34,8 +9,23 @@ cd pitari
 ```
 
 ## Run server
+
+- For Production
+
 ```
 docker-compose up -d
+```
+
+- For Mac or Linux
+
+```
+docker-compose -f docker-compose-dev_mac_linux.yaml up -d
+```
+
+- For Windows
+
+```
+docker-compose -f docker-compose-dev_windows.yaml up -d
 ```
 
 ## Run migrate

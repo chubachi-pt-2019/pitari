@@ -6,8 +6,6 @@ services:
     environment:
       - POSTGRES_PASSWORD=pitari
       - POSTGRES_USER=pitari
-    ports:
-      - 5432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
     restart: always
@@ -22,13 +20,23 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./:/usr/src/app
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" #rails server -b 0.0.0.0
+      - /rails/pitari:/usr/src/app
+    command: rails server -b 0.0.0.0
     restart: always
     networks:
       pitari_dev:
         aliases:
           - app.local
+  chrome:
+    image: selenium/standalone-chrome-debug:3.141.0-actinium
+    ports:
+    - 4444:4444
+    - 5900:5900
+    restart: always
+    networks:
+      pitari_dev:
+        aliases:
+          - chrome.local
 
 volumes:
   pgdata:
