@@ -1,3 +1,19 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-join-form {
+    height: 20vh;
+    min-height: 120px;
+    margin-top: 30vh;
+    display: flex;
+    justify-content: center;
+}
+
+.new_user {
+    width: 100%;
+}
+
+.m-0 {
+    margin: 0
+}
