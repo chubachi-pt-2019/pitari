@@ -16,6 +16,7 @@ RUN apk add --update --no-cache --virtual=build-dependencies \
       zlib-dev && \
     apk add --update --no-cache \
       bash \
+      less \
       libxslt	\
       nodejs \
       postgresql \

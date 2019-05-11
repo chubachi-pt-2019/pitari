@@ -1,7 +1,12 @@
 class UsersController < ApplicationController
   def new
-    @user = User.new
-    @user.discuss_id = params[:discuss_id]
+    if session[:user_id]
+      @discuss = Discuss.find(params[:discuss_id])
+      redirect_to @discuss
+    else 
+      @user = User.new
+      @user.discuss_id = params[:discuss_id]
+    end
   end
 
   def create
@@ -9,7 +14,10 @@ class UsersController < ApplicationController
     @user.discuss_id = user_params["discuss_id"]
     @user.name = user_params["name"]
     @discuss = Discuss.find(@user.discuss_id)
-    if @user.save
+    if session[:user_id]
+      redirect_to @discuss
+    elsif @user.save
+      session[:user_id] = @user.id
       redirect_to @discuss
     else
       flash.now[:danger] = @user.errors.full_messages
