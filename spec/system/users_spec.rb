@@ -12,14 +12,15 @@ describe 'User管理機能', type: :system do
 
     context '参加ページが表示される' do
         it 'ページが表示される' do
-            expect(page).to have_button '参加する'
+            expect(page).to have_content @discuss_1.name
+            expect(page).to have_button 'join'
         end
     end
 
     context '参加できる' do
         before do
-            fill_in 'Name', with: 'ユーザーB'
-            click_button '参加する'
+            fill_in 'user_name', with: 'ユーザーB'
+            click_button 'join'
         end
         
         it 'discussページが表示される' do
@@ -30,11 +31,11 @@ describe 'User管理機能', type: :system do
 
     context '参加できない' do
         before do
-            click_button '参加する'
+            click_button 'join'
         end
         
         it '参加ページが再表示' do
-            expect(page).to have_button '参加する'
+            expect(page).to have_button 'join'
             expect(page).to have_css '.alert-danger'
         end
     end
