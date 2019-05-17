@@ -5,22 +5,34 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
   disconnected: ->
     # Called when the subscription has been terminated by the server
 
-  received: (data) ->
+  received: (responseData) ->
     # Called when there's incoming data on the websocket for this channel
-    $("#user-name-display").text(data.user.name)
-    $("#agenda-name-display").text(data.agenda.name)
-    opinion = data.agenda.opinion
-    if opinion
-      $("#agenda-opinion-display-positive").show()
-      $("#agenda-opinion-display-negative").hide()
-    else
-      $("#agenda-opinion-display-positive").hide()
-      $("#agenda-opinion-display-negative").show()
-    
-
-
+    type = responseData.type
+    data = responseData.data
+    switch
+      when type == 'speak'
+        speakAction data
+      when type == 'join'
+        joinAction data
+  
   speak: (agenda_name, agenda_opinion) ->
     @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
+
+
+speakAction = (data) ->
+  $("#user-name-display").text(data.user.name)
+  $("#agenda-name-display").text(data.agenda.name)
+  opinion = data.agenda.opinion
+  if opinion
+    $("#agenda-opinion-display-positive").show()
+    $("#agenda-opinion-display-negative").hide()
+  else
+    $("#agenda-opinion-display-positive").hide()
+    $("#agenda-opinion-display-negative").show()
+
+joinAction = (data) ->
+  console.log(data)
+
 
 $(document).ready () ->
   $("#user-speak").on 'click', () ->
