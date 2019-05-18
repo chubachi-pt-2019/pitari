@@ -2,6 +2,7 @@ class DiscussController < ApplicationController
 
   def index
   end
+  
   def show
     if session[:user_id]
       @discuss = Discuss.find(params[:id])
@@ -40,6 +41,10 @@ class DiscussController < ApplicationController
       flash.now[:danger] = agenda.errors.full_messages
       render :new
     end
+  end
+
+  def list
+    @users = User.includes([:discuss]).order(created_at: :desc)
   end
   
   private

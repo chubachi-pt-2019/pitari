@@ -57,9 +57,17 @@
         </div>
     </div>
 </div>
-<div id="users-container">
-    <!--　TODO:参加者リスト　-->
-    <!--　TODO:リアルタイム更新　-->
+
+<!--　TODO:参加者リスト　-->
+<div id="users-container" class="topnewbox">
+        <% @discuss.users.each do |user| %>
+                <div class="inline-block">
+                    <h3 p class="bg-success"><%= user.name %></p></h3>
+                    <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
+                </div>
+        <% end %>
+        
+        <!--　TODO:リアルタイム更新　-->
     <div></div>
 </div>
 
