@@ -57,11 +57,17 @@
         </div>
     </div>
 </div>
-<!--
-<div id="users-container">
-    <div></div>
+
+<!--　TODO:参加者リスト　-->
+
+<!--　TODO:参加者リスト =>rowで試す　-->
+<div id="users-container" class="row">
+    <% @discuss.users.each do |user| %> 
+        <div class="col-md-2"><h3 p class="bg-success"><%= user.name %></p></h3>
+        <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
+        </div> 
+    <% end %>
 </div>
--->
 
 
 <script>

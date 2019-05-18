@@ -2,6 +2,7 @@ class DiscussController < ApplicationController
 
   def index
   end
+  
   def show
     if session[:user_id]
       @discuss = Discuss.find(params[:id])
