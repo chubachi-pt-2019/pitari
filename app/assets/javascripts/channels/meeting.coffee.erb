@@ -18,7 +18,6 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
   speak: (agenda_name, agenda_opinion) ->
     @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
 
-
 speakAction = (data) ->
   $("#user-name-display").text(data.user.name)
   $("#agenda-name-display").text(data.agenda.name)
@@ -31,8 +30,17 @@ speakAction = (data) ->
     $("#agenda-opinion-display-negative").show()
 
 joinAction = (data) ->
-  console.log(data)
-
+  newUserNode = document.createElement "li"
+  newUserDiv = document.createElement "div"
+  newUserDiv.className = "col-sm-2 full-height"
+  newUserNameSpan = document.createElement "span"
+  newUserNameSpan.innerText = data.name
+  newUserImage = document.createElement "IMG"
+  newUserImage.src = "<%= asset_path('sarariman.svg') %>"
+  newUserDiv.appendChild newUserNameSpan
+  newUserDiv.appendChild newUserImage
+  newUserNode.appendChild newUserDiv
+  $("#users-list").append newUserNode
 
 $(document).ready () ->
   $("#user-speak").on 'click', () ->
