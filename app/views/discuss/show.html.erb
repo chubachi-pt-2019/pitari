@@ -59,6 +59,8 @@
 </div>
 
 <!--　TODO:参加者リスト　-->
+<!--　TODO:参加者リスト =>inline-blockで試す　-->
+<% if false %>
 <div id="users-container" class="topnewbox">
         <% @discuss.users.each do |user| %>
                 <div class="inline-block">
@@ -66,7 +68,26 @@
                     <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
                 </div>
         <% end %>
+</div>
+<% end %>
+
+<!--　TODO:参加者リスト =>rowで試す　-->
+<div id="users-container" class="row"> 
+        <% @discuss.users.each do |user| %> 
+                <div class="col-md-2"><h3 p class="bg-success"><%= user.name %></p></h3>
+                <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
+                    <% if false %>
+                    #<div>
+                    #    <%= link_to listing_path(listing) do %>
+                    #        <%= image_tag listing.main_photos[0].image.url,class:"image-s" %>
+                    #    <% end %>
+                    #</div>
+                    <% end %>
+                </div> 
+        <% end %>
+</div>
         
+
         <!--　TODO:リアルタイム更新　-->
     <div></div>
 </div>
