@@ -6,6 +6,11 @@ class MeetingChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+    response_data = Hash.new
+    response_data[:type] = "leave"
+    response_data[:data] = current_user.id
+    current_user.update!(active: false)
+    ActionCable.server.broadcast "meeting_#{current_user.discuss_id}", response_data
   end
 
   def speak(data)

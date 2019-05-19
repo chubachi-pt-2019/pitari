@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     @user = User.new
     @user.discuss_id = user_params["discuss_id"]
     @user.name = user_params["name"]
+    @user.active = true
     @discuss = Discuss.find(@user.discuss_id)
     if session[:user_id]
       redirect_to @discuss

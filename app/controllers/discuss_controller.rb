@@ -4,7 +4,9 @@ class DiscussController < ApplicationController
   end
   
   def show
-    if session[:user_id]
+    if session[:user_id] && User.exists?(id: session[:user_id])
+      user = User.find(session[:user_id])
+      user.update!(active: true)
       @discuss = Discuss.find(params[:id])
     else
       redirect_to root_path
@@ -26,7 +28,9 @@ class DiscussController < ApplicationController
     end
 
     user = User.new(name: discuss_params["user"]["name"],
-                    discuss_id: @discuss.id)
+                    discuss_id: @discuss.id,
+                    active: true
+                    )
     if user.save
     else
       flash.now[:danger] = user.errors.full_messages
