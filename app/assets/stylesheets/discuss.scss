@@ -8,6 +8,10 @@
     padding: 0;
 }
 
+ul {
+    list-style-type: none
+}
+
 .my-3 {
     margin-top: 15px;
     margin-bottom: 15px;
@@ -20,27 +24,22 @@
 }
 
 #link-share-container {
-    top: 0;
-    position: absolute;
     width: 100%;
     height: 10vh;
     min-height: 95px;
 }
 
 #conversation-container {
-    top: 10vh;
     width: 100%;
-    position: absolute;
     height: 70vh;
     min-height: 675px;
 }
 
 #users-container {
-    top: 80vh;
-    position: absolute;
     width: 100%;
-    height: 20vh;
     min-height: 190px;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
 }
 
 .has-border {
