@@ -19,6 +19,7 @@ class UsersController < ApplicationController
       redirect_to @discuss
     elsif @user.save
       session[:user_id] = @user.id
+      session[:new_in] = true
       redirect_to @discuss
     else
       flash.now[:danger] = @user.errors.full_messages
