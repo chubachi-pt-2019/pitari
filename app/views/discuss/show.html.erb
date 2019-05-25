@@ -67,12 +67,26 @@
                 <div class="col-sm-2 full-height">
                     <span><%= user.name %></span>
                     <%= image_tag("sarariman.svg", class: "speaking-user-icon")%>
+                    <div class="heartRev">                  
+                    <% user.understand.times do |i| %>
+                        <span class="heartR on">heart<%= i%></span>
+                    <% end %>
+                    </div> 
                 </div>
                 </li>
             <% end %>
         </ul>
     </div>
 </div>
+
+<!--　星表示　-->
+<script>
+    $('.heartRev span').click(function(){
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+        return false;
+    });
+</script>
 
 
 <script>

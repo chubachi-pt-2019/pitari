@@ -26,7 +26,7 @@ class DiscussController < ApplicationController
     end
 
     user = User.new(name: discuss_params["user"]["name"],
-                    discuss_id: @discuss.id)
+                    discuss_id: @discuss.id, understand: 4)
     if user.save
     else
       flash.now[:danger] = user.errors.full_messages
