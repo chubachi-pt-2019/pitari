@@ -99,3 +99,16 @@ img {
         height: 49.5%;
     }
 }
+
+.heartR{
+    background: url('haimark.svg') no-repeat right 0;
+    background-size: auto 100%;
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    text-indent: -9999px;
+    cursor: pointer;
+  }
+  .heartR.on{
+    background: url('akamark.svg') no-repeat right 0;
+  }

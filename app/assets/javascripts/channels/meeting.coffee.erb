@@ -14,6 +14,8 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
         speakAction data
       when type == 'join'
         joinAction data
+      when type == 'leave'
+        leaveAction data
   
   speak: (agenda_name, agenda_opinion) ->
     @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
@@ -30,17 +32,22 @@ speakAction = (data) ->
     $("#agenda-opinion-display-negative").show()
 
 joinAction = (data) ->
-  newUserNode = document.createElement "li"
-  newUserDiv = document.createElement "div"
-  newUserDiv.className = "col-sm-2 full-height"
-  newUserNameSpan = document.createElement "span"
-  newUserNameSpan.innerText = data.name
-  newUserImage = document.createElement "IMG"
-  newUserImage.src = "<%= asset_path('sarariman.svg') %>"
-  newUserDiv.appendChild newUserNameSpan
-  newUserDiv.appendChild newUserImage
-  newUserNode.appendChild newUserDiv
-  $("#users-list").append newUserNode
+  if $("#user-#{data.id}").length <= 0
+    newUserNode = document.createElement "li"
+    newUserNode.setAttribute 'id', "user-#{data.id}"
+    newUserDiv = document.createElement "div"
+    newUserDiv.className = "col-sm-2 full-height"
+    newUserNameSpan = document.createElement "span"
+    newUserNameSpan.innerText = data.name
+    newUserImage = document.createElement "IMG"
+    newUserImage.src = "<%= asset_path('sarariman.svg') %>"
+    newUserDiv.appendChild newUserNameSpan
+    newUserDiv.appendChild newUserImage
+    newUserNode.appendChild newUserDiv
+    $("#users-list").append newUserNode
+
+leaveAction = (data) ->
+  $("#user-#{data}").remove()
 
 $(document).ready () ->
   $("#user-speak").on 'click', () ->

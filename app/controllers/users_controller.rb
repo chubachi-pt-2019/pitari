@@ -13,11 +13,13 @@ class UsersController < ApplicationController
     @user = User.new
     @user.discuss_id = user_params["discuss_id"]
     @user.name = user_params["name"]
+    @user.active = true
     @discuss = Discuss.find(@user.discuss_id)
     if session[:user_id]
       redirect_to @discuss
     elsif @user.save
       session[:user_id] = @user.id
+      session[:new_in] = true
       redirect_to @discuss
     else
       flash.now[:danger] = @user.errors.full_messages

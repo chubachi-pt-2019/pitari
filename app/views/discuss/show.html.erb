@@ -16,7 +16,7 @@
                 <div class="col-sm-4 full-height speaking-user">
                     <p><%= image_tag("sarariman.svg", class: "speaking-user-icon")%></p>
                     <!--　TODO:発言者の名前　-->
-                    <h3 id="user-name-display"><%=@discuss.users.first.name %></h3>
+                    <h3 id="user-name-display"><%=@discuss.agendas.last.user.name %></h3>
                 </div>
                 <div class="col-sm-8 full-height">
                     <!--　TODO:発言者の話題と態度　-->
@@ -66,13 +66,27 @@
                 <li>
                 <div class="col-sm-2 full-height">
                     <span><%= user.name %></span>
-                    <%= image_tag("sarariman.svg", class: "speaking-user-icon")%>
+                    <%= image_tag("sarariman.svg")%>
+                    <div class="heartRev">                  
+                    <% user.understand.times do |i| %>
+                        <span class="heartR on">heart<%= i%></span>
+                    <% end %>
+                    </div> 
                 </div>
                 </li>
             <% end %>
         </ul>
     </div>
 </div>
+
+<!--　星表示　-->
+<script>
+    $('.heartRev span').click(function(){
+        $(this).parent().children('span').removeClass('on');
+        $(this).addClass('on').prevAll('span').addClass('on');
+        return false;
+    });
+</script>
 
 
 <script>
