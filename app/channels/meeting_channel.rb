@@ -6,6 +6,7 @@ class MeetingChannel < ApplicationCable::Channel
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
+    OfflineJob.perform_later current_user
   end
 
   def speak(data)

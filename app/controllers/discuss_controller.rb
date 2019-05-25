@@ -4,7 +4,13 @@ class DiscussController < ApplicationController
   end
   
   def show
-    if session[:user_id]
+    if session[:user_id] && User.exists?(id: session[:user_id])
+
+      if !session[:new_in]
+        user = User.find(session[:user_id])
+        ReturnJob.set(wait: 2.second).perform_later user
+      end
+      session.delete :new_in
       @discuss = Discuss.find(params[:id])
     else
       redirect_to root_path
@@ -26,7 +32,9 @@ class DiscussController < ApplicationController
     end
 
     user = User.new(name: discuss_params["user"]["name"],
-                    discuss_id: @discuss.id)
+                    discuss_id: @discuss.id,
+                    active: true
+                    )
     if user.save
     else
       flash.now[:danger] = user.errors.full_messages
@@ -36,6 +44,7 @@ class DiscussController < ApplicationController
                         opinion: discuss_params["user"]["agenda"]["opinion"],
                         user_id: user.id)
     if agenda.save
+      session[:new_in] = true
       redirect_to @discuss
     else
       flash.now[:danger] = agenda.errors.full_messages

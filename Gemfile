@@ -66,7 +66,8 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Add Bootstrap design
-gem 'bootstrap-sass', '3.3.7'
+gem 'sassc', '>= 2.0.1'
+gem 'bootstrap-sass', '>= 3.4.1'
 
 # Add Jquery
 gem 'jquery-rails' 
