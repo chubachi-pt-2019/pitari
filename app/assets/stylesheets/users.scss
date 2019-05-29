@@ -3,11 +3,14 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .user-join-form {
-    height: 20vh;
-    min-height: 120px;
-    margin-top: 30vh;
+    margin-top: 20vh;
     display: flex;
     justify-content: center;
+    padding-bottom: 50px;
+
+    input {
+        margin-top: 50px;
+    }
 }
 
 .new_user {

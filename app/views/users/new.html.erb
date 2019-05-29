@@ -1,11 +1,18 @@
 <% provide(:title, 'Sign up') %>
 
+<div id="link-share-container" class="row">
+    <div class="col-md-2">
+        <span id="pitari-logo"><strong>Pitari</strong></span>
+    </div>
+</div>
+
 <div class="row m-0">
-  <div class="col-md-6 col-md-offset-3 has-border user-join-form">
+  <div class="col-md-6 col-md-offset-3 user-join-form content-center">
     <%= form_for @user, :url => {:action => 'create'} do |f| %>
-      <h3>「<%=@user.discuss.name %>」参加する</h3>
+      <h2>Join the meeting</h2>
+      <h2>「<%=@user.discuss.name %>」</h2>
         <div class="input-group">
-        <%= f.text_field :name, class: 'form-control', placeholder: '名前を入力してください...' %>
+        <%= f.text_field :name, class: 'form-control', placeholder: 'Please input your name...' %>
         <%= f.hidden_field :discuss_id, :value => @user.discuss_id %>
         <span class="input-group-btn">
           <%= f.submit "join", class: "btn btn-default" %>

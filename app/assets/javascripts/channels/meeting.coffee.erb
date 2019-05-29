@@ -38,11 +38,12 @@ joinAction = (data) ->
     newUserDiv = document.createElement "div"
     newUserDiv.className = "col-sm-2 full-height"
     newUserNameSpan = document.createElement "span"
+    newUserNameSpan.className = 'participant-name'
     newUserNameSpan.innerText = data.name
     newUserImage = document.createElement "IMG"
-    newUserImage.src = "<%= asset_path('sarariman.svg') %>"
-    newUserDiv.appendChild newUserNameSpan
+    newUserImage.src = "<%= asset_path('listening.svg') %>"
     newUserDiv.appendChild newUserImage
+    newUserDiv.appendChild newUserNameSpan
     newUserNode.appendChild newUserDiv
     $("#users-list").append newUserNode
 
