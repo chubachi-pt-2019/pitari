@@ -1,16 +1,31 @@
-<div class="col-md-12 content-center">
+<!-- 1.ナビゲーションバーの設定 -->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- 2.ヘッダ情報 -->
+        <div class="navbar-header">
+            <a class="navbar-brand">オフライン会議支援ツール Pitari (ぴたり）</a>
+        </div>
+        <div class="collapse navbar-collapse flex-column" id="navbarSupportedContent">
+          <div class="site-description">意見ぴったり！時間ぴったり！</div>
+          <div class="site-description">Yes-Noの意思表示をハッキリして、異文化コミュニケーションを円滑に！　効率よく会議を進めましょう。</div>
+          </div>
+        </div>      
+    </div>
+</nav>
+
+<div class="col-md-10 content-center">
   <%= image_tag("logo.png", class: "pj-logo")%>
 </div>
-<div class="col-md-12 meetings-new-form">
+<div class="col-md-10 meetings-new-form">
   <div class="col-md-4 col-md-offset-4 content-center">
   <%= form_for @discuss , :url => {:action => 'create'}  do |discuss_form| %>
-      <%= discuss_form.text_field :name, placeholder: 'Meeting Name', class: 'form-control my-3'%>
+      <%= discuss_form.text_field :name, placeholder: '1) 会議名　Meeting Name', class: 'form-control my-3'%>
 
         <%= discuss_form.fields_for :user do |user_form| %>
-        <%= user_form.text_field :name, placeholder: 'User Name', class: 'form-control my-3' %>
+        <%= user_form.text_field :name, placeholder: '2) 発議者名　User Name', class: 'form-control my-3' %>
       
         <%= user_form.fields_for :agenda do |agenda_form| %>
-        <%= agenda_form.text_field :name, placeholder: 'Agenda', class: 'form-control my-3' %>
+        <%= agenda_form.text_field :name, placeholder: '3) 議題1　Agenda　⇒4) 意思表示　Positive-Negative', class: 'form-control my-3' %>
         <div class="col-sm-12">
           <div class="col-sm-3 col-sm-offset-3">
             <%= agenda_form.radio_button :opinion, "1" %>
@@ -26,4 +41,16 @@
         <%= discuss_form.submit "create", class: "btn btn-primary" %>
     <% end %>
   </div>
+</div>
+<div class="col-md-2 expalanation">
+  <p>【さっそくスタート！】</p>
+  <p>STEP1</p>
+  <p>主催者は1)~4)を登録し、会議を作る</p>
+  <p>　1)会議名（Meeting Name）</p>
+  <p>　2)発議者名（User Name）</p>
+  <p>　3)１つめの議題（Agenda）</p>
+  <p>　4)当議題への意見・意思表示</p>
+  <p>　（Positive-Negative)」</p>
+  <p>※現状では、会議全体の次第と議事録管理機能はありません。</p>
+  <p>※会議名にリンクを貼ることは可能です。</p>
 </div>
