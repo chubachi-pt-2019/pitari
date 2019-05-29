@@ -22,7 +22,7 @@
                     <!--　TODO:発言者の話題と態度　-->
                     <div class="col-sm-12 agenda-name half-height speaking-agenda-name">
                         <h4 id="agenda-name-display"><%=@discuss.agendas.last.name %></h4>
-                    </div>
+                    </div>                    
                     <div class="col-sm-12 agenda-opinion half-height">
                         <% if @discuss.agendas.last.opinion %>
                             <%= image_tag("iine.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-positive") %>
@@ -62,29 +62,42 @@
 <div id="users-container" class="content-center">
     <div class="col-sm-10 has-border col-sm-offset-1 full-height">
         <ul id="users-list">
+        <%= hidden_field_tag :currentUserId, @user_id %>
             <% @discuss.users.each do |user| %>
                 <li>
                 <div class="col-sm-2 full-height">
                     <span><%= user.name %></span>
                     <%= image_tag("sarariman.svg")%>
-                    <div class="heartRev">                  
+                    <div class="heartRev">
+                    <p hidden="hidden">
+                    <%= user.id %>
+                    </p>             
                     <% user.understand.times do |i| %>
                         <span class="heartR on">heart<%= i%></span>
                     <% end %>
+                    <% (5-user.understand).times do |i| %>
+                        <span class="heartR">heart<%= i%></span>
+                    <% end %>                    
                     </div> 
                 </div>
                 </li>
             <% end %>
         </ul>
+        <div class="col-sm-12 my-3">
+        <%= button_tag "understand", class: "btn btn-danger col-sm-4 col-sm-offset-4", id: "understand"%>
+    </div>
     </div>
 </div>
 
 <!--　星表示　-->
 <script>
     $('.heartRev span').click(function(){
-        $(this).parent().children('span').removeClass('on');
-        $(this).addClass('on').prevAll('span').addClass('on');
-        return false;
+        var currentUserId = document.getElementById("currentUserId");
+        if ($("#currentUserId")[0].value == $(this).parent().children('p').first().text().trim()) {
+            $(this).parent().children('span').removeClass('on');
+            $(this).addClass('on').prevAll('span').addClass('on');
+            return false;
+        }
     });
 </script>
 
