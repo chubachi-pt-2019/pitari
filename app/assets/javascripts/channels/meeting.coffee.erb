@@ -16,9 +16,18 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
         joinAction data
       when type == 'leave'
         leaveAction data
+      when type == 'updateUnderstand'
+        understandAction data        
   
   speak: (agenda_name, agenda_opinion) ->
     @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
+
+  understandUpdate: (understand, user_id) ->
+    @perform 'understandUpdate', understand: understand,user_id: user_id
+
+
+understandAction = (data) ->
+  $("#user-name-display").text('test')
 
 speakAction = (data) ->
   $("#user-name-display").text(data.user.name)
@@ -53,3 +62,8 @@ $(document).ready () ->
   $("#user-speak").on 'click', () ->
     App.meeting.speak($("input[name='agenda_name']").val(), $("input[name='agenda_opinion']:checked").val())
     $("input[name='agenda_name']").val('')
+  
+  $('.heartRev span').click () ->
+    App.meeting.understandUpdate($(this).parent().find('.on').length, 
+    $(this).parent().children('p').first().text())
+    
