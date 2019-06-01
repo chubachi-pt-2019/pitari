@@ -27,7 +27,16 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
 
 
 understandAction = (data) ->
-  $("#user-name-display").text('test')
+  i=0
+  $(".heartRev").each ()->
+    if $('.heartRev').eq(i).children('p').eq(0).text().trim() == data.user.id.toString()
+      $('.heartRev').eq(i).children('span').removeClass('on')
+      j=0
+      $('.heartRev').eq(i).children('span').each ()->
+        if j < data.user.understand
+          $('.heartRev').eq(i).children('span').eq(j).addClass('on').prevAll('span').addClass('on')
+          j++              
+    i++
 
 speakAction = (data) ->
   $("#user-name-display").text(data.user.name)
@@ -52,7 +61,39 @@ joinAction = (data) ->
     newUserImage.src = "<%= asset_path('sarariman.svg') %>"
     newUserDiv.appendChild newUserNameSpan
     newUserDiv.appendChild newUserImage
+
+    newHeartSpan1 = document.createElement "span"
+    newHeartSpan2 = document.createElement "span"
+    newHeartSpan3 = document.createElement "span"
+    newHeartSpan4 = document.createElement "span"
+    newHeartSpan5 = document.createElement "span"
+    newUserid = document.createElement "p"
+    newUserid.hidden = "hidden"
+    newUserid.innerText = data.id
+    newHeartSpan1.innerText = "Heart1"
+    newHeartSpan1.className = "heartR"
+    newHeartSpan2.innerText = "Heart2"
+    newHeartSpan2.className = "heartR"
+    newHeartSpan3.innerText = "Heart3"
+    newHeartSpan3.className = "heartR"
+    newHeartSpan4.innerText = "Heart4"
+    newHeartSpan4.className = "heartR"
+    newHeartSpan5.innerText = "Heart5"
+    newHeartSpan5.className = "heartR"
+
+
+    newHeartDiv = document.createElement "div"
+    newHeartDiv.className = "heartRev"
+    newHeartDiv.appendChild newUserid
+    newHeartDiv.appendChild newHeartSpan1
+    newHeartDiv.appendChild newHeartSpan2
+    newHeartDiv.appendChild newHeartSpan3
+    newHeartDiv.appendChild newHeartSpan4
+    newHeartDiv.appendChild newHeartSpan5
+
+    newUserDiv.appendChild newHeartDiv
     newUserNode.appendChild newUserDiv
+    
     $("#users-list").append newUserNode
 
 leaveAction = (data) ->
