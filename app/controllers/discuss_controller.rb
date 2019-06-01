@@ -5,6 +5,7 @@ class DiscussController < ApplicationController
   
   def show
     if session[:user_id] && User.exists?(id: session[:user_id])
+      @user_id = session[:user_id]
 
       if !session[:new_in]
         user = User.find(session[:user_id])
@@ -36,6 +37,7 @@ class DiscussController < ApplicationController
                     active: true
                     )
     if user.save
+      @user_id = user.id
     else
       flash.now[:danger] = user.errors.full_messages
     end

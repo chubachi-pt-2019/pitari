@@ -16,9 +16,27 @@ App.meeting = App.cable.subscriptions.create "MeetingChannel",
         joinAction data
       when type == 'leave'
         leaveAction data
+      when type == 'updateUnderstand'
+        understandAction data        
   
   speak: (agenda_name, agenda_opinion) ->
     @perform 'speak', agenda_name: agenda_name, agenda_opinion: agenda_opinion
+
+  understandUpdate: (understand, user_id) ->
+    @perform 'understandUpdate', understand: understand,user_id: user_id
+
+
+understandAction = (data) ->
+  i=0
+  $(".heartRev").each ()->
+    if $('.heartRev').eq(i).children('p').eq(0).text().trim() == data.user.id.toString()
+      $('.heartRev').eq(i).children('span').removeClass('on')
+      j=0
+      $('.heartRev').eq(i).children('span').each ()->
+        if j < data.user.understand
+          $('.heartRev').eq(i).children('span').eq(j).addClass('on').prevAll('span').addClass('on')
+          j++              
+    i++
 
 speakAction = (data) ->
   $("#user-name-display").text(data.user.name)
@@ -38,12 +56,45 @@ joinAction = (data) ->
     newUserDiv = document.createElement "div"
     newUserDiv.className = "col-sm-2 full-height"
     newUserNameSpan = document.createElement "span"
+    newUserNameSpan.className = 'participant-name'
     newUserNameSpan.innerText = data.name
     newUserImage = document.createElement "IMG"
-    newUserImage.src = "<%= asset_path('sarariman.svg') %>"
-    newUserDiv.appendChild newUserNameSpan
+    newUserImage.src = "<%= asset_path('listening.svg') %>"
     newUserDiv.appendChild newUserImage
+    newUserDiv.appendChild newUserNameSpan
+
+    newHeartSpan1 = document.createElement "span"
+    newHeartSpan2 = document.createElement "span"
+    newHeartSpan3 = document.createElement "span"
+    newHeartSpan4 = document.createElement "span"
+    newHeartSpan5 = document.createElement "span"
+    newUserid = document.createElement "p"
+    newUserid.hidden = "hidden"
+    newUserid.innerText = data.id
+    newHeartSpan1.innerText = "Heart1"
+    newHeartSpan1.className = "heartR"
+    newHeartSpan2.innerText = "Heart2"
+    newHeartSpan2.className = "heartR"
+    newHeartSpan3.innerText = "Heart3"
+    newHeartSpan3.className = "heartR"
+    newHeartSpan4.innerText = "Heart4"
+    newHeartSpan4.className = "heartR"
+    newHeartSpan5.innerText = "Heart5"
+    newHeartSpan5.className = "heartR"
+
+
+    newHeartDiv = document.createElement "div"
+    newHeartDiv.className = "heartRev"
+    newHeartDiv.appendChild newUserid
+    newHeartDiv.appendChild newHeartSpan1
+    newHeartDiv.appendChild newHeartSpan2
+    newHeartDiv.appendChild newHeartSpan3
+    newHeartDiv.appendChild newHeartSpan4
+    newHeartDiv.appendChild newHeartSpan5
+
+    newUserDiv.appendChild newHeartDiv
     newUserNode.appendChild newUserDiv
+    
     $("#users-list").append newUserNode
 
 leaveAction = (data) ->
@@ -53,3 +104,8 @@ $(document).ready () ->
   $("#user-speak").on 'click', () ->
     App.meeting.speak($("input[name='agenda_name']").val(), $("input[name='agenda_opinion']:checked").val())
     $("input[name='agenda_name']").val('')
+  
+  $('.heartRev span').click () ->
+    App.meeting.understandUpdate($(this).parent().find('.on').length, 
+    $(this).parent().children('p').first().text())
+    

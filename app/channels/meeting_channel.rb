@@ -12,4 +12,12 @@ class MeetingChannel < ApplicationCable::Channel
   def speak(data)
     Agenda.create!(name: data['agenda_name'], opinion: data['agenda_opinion'], user_id: current_user.id)
   end
+
+  def understandUpdate(data)   
+    updateUser = User.find(current_user.id)
+    if current_user.id.to_i == data['user_id'].to_i
+      updateUser.update(understand: data['understand'])
+      UpdateUnderstandJob.perform_later updateUser
+    end
+  end 
 end
