@@ -65,15 +65,22 @@
     <div class="col-md-10 has-border col-md-offset-1 full-height">
         <div class="container-title col-md-12">Participants</div>
         <ul id="users-list">
+        <%= hidden_field_tag :currentUserId, @user_id %>
             <% @discuss.users.each do |user| %>
-                <li>
+                <li id = "user-<%= user.id %>" >
                 <div class="col-sm-2 full-height">
                     <%= image_tag("listening.svg")%>
                     <span class="participant-name"><%= user.name %></span>
-                    <div class="heartRev">                  
+                    <div class="heartRev">
+                    <p hidden="hidden">
+                    <%= user.id %>
+                    </p>             
                     <% user.understand.times do |i| %>
                         <span class="heartR on">heart<%= i%></span>
                     <% end %>
+                    <% (5-user.understand).times do |i| %>
+                        <span class="heartR">heart<%= i%></span>
+                    <% end %>                    
                     </div> 
                 </div>
                 </li>
@@ -85,9 +92,12 @@
 <!--　星表示　-->
 <script>
     $('.heartRev span').click(function(){
-        $(this).parent().children('span').removeClass('on');
-        $(this).addClass('on').prevAll('span').addClass('on');
-        return false;
+        var currentUserId = document.getElementById("currentUserId");
+        if ($("#currentUserId")[0].value == $(this).parent().children('p').first().text().trim()) {
+            $(this).parent().children('span').removeClass('on');
+            $(this).addClass('on').prevAll('span').addClass('on');
+            return false;
+        }
     });
 </script>
 
