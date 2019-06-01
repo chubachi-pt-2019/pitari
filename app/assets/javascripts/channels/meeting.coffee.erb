@@ -59,7 +59,7 @@ joinAction = (data) ->
     newUserNameSpan.className = 'participant-name'
     newUserNameSpan.innerText = data.name
     newUserImage = document.createElement "IMG"
-    newUserImage.src = "<%= asset_path('listening.svg') %>"
+    newUserImage.src = "<%= asset_path('participant.svg') %>"
     newUserDiv.appendChild newUserImage
     newUserDiv.appendChild newUserNameSpan
 
