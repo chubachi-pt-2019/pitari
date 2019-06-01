@@ -1,6 +1,10 @@
+<%= render('layouts/pitari_help')%>
 <div id="link-share-container" class="row all-contents-center">
-    <div class="col-md-2">
-        <span id="pitari-logo"><strong>Pitari</strong></span>
+    <div class="col-md-1">
+        <span id="pitari-logo">Pitari</span>
+    </div>
+    <div class="col-md-1">
+        <span id="pitari-help">Help</span>
     </div>
     <div class="col-md-7 col-md-offset-3">
         <div class="input-group">
@@ -16,10 +20,7 @@
         <div class="container-title col-md-12">Talking</div>
         <div class="col-md-12 half-height">
             <div class="col-md-8 col-md-offset-2 half-height">
-                <div class="col-md-4 full-height all-contents-center">
-                    <%= image_tag("chat.svg", class: "speaking-user-icon")%>
-                </div>
-                <div class="col-md-8 full-height all-contents-center">
+                <div class="col-md-8 col-md-offset-2 full-height all-contents-center">
                     <div class="col-md-12 agenda-opinion full-height">
                         <% if @discuss.agendas.last.opinion %>
                             <%= image_tag("happy.svg", class: "speaking-agenda-opinion", id: "agenda-opinion-display-positive") %>
@@ -69,7 +70,7 @@
             <% @discuss.users.each do |user| %>
                 <li id = "user-<%= user.id %>" >
                 <div class="col-sm-2 full-height">
-                    <%= image_tag("listening.svg")%>
+                    <%= image_tag("participant.svg")%>
                     <span class="participant-name"><%= user.name %></span>
                     <div class="heartRev">
                     <p hidden="hidden">
@@ -112,5 +113,27 @@
         document.execCommand("copy")
         document.body.removeChild(tempElement)
         alert("link copied")
+
+        //fix iPhone copy
+        var global = window;
+        global.COPY_TO_CLIPBOARD = global.COPY_TO_CLIPBOARD || {}
+        global.COPY_TO_CLIPBOARD.copyToClipboard = function ()
+        {
+            // textarea作成
+            var copyTextareaElement = "https://" + document.createElement("textarea");
+            copyTextareaElement.textContent = document.URL;
+            // bodyに追加
+            var bodyElm = document.getElementsByTagName("body")[0];
+            bodyElm.appendChild(copyTextareaElement);
+            // 選択状態にする
+            copyTextareaElement.contentEditable = true;       // iOS will only select text on non-form elements if contentEditable = true;
+            copyTextareaElement.readOnly = false;             // iOS will not select in a read only form element
+            copyTextareaElement.setSelectionRange(0, 999999); // iOS only selects "form" elements with SelectionRange
+            // ClipboradへCopy実行
+            var successful = document.execCommand('copy');
+            // textarea削除
+            bodyElm.removeChild(copyTextareaElement);
+        }
+        global.COPY_TO_CLIPBOARD.copyToClipboard();
     }
 </script>
