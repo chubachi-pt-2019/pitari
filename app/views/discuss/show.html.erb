@@ -113,5 +113,27 @@
         document.execCommand("copy")
         document.body.removeChild(tempElement)
         alert("link copied")
+
+        //fix iPhone copy
+        var global = window;
+        global.COPY_TO_CLIPBOARD = global.COPY_TO_CLIPBOARD || {}
+        global.COPY_TO_CLIPBOARD.copyToClipboard = function ()
+        {
+            // textarea作成
+            var copyTextareaElement = "https://" + document.createElement("textarea");
+            copyTextareaElement.textContent = document.URL;
+            // bodyに追加
+            var bodyElm = document.getElementsByTagName("body")[0];
+            bodyElm.appendChild(copyTextareaElement);
+            // 選択状態にする
+            copyTextareaElement.contentEditable = true;       // iOS will only select text on non-form elements if contentEditable = true;
+            copyTextareaElement.readOnly = false;             // iOS will not select in a read only form element
+            copyTextareaElement.setSelectionRange(0, 999999); // iOS only selects "form" elements with SelectionRange
+            // ClipboradへCopy実行
+            var successful = document.execCommand('copy');
+            // textarea削除
+            bodyElm.removeChild(copyTextareaElement);
+        }
+        global.COPY_TO_CLIPBOARD.copyToClipboard();
     }
 </script>
