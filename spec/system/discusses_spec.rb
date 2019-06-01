@@ -9,11 +9,11 @@ describe 'Discuss管理機能', type: :system do
     context 'Positiveな会議を作成できる' do
       before do
         visit root_path
-        fill_in 'Meeting Name', with: '会議A'
-        fill_in 'User Name', with: 'ユーザーA'
-        fill_in 'Agenda', with: 'テーマ1'
+        fill_in 'Please input the meeting name...', with: '会議A'
+        fill_in 'Please input your name...', with: 'ユーザーA'
+        fill_in 'Please input the first agenda...', with: 'テーマ1'
         choose  'Positive'
-        click_button 'create'
+        click_button 'Start'
       end
 
       it 'ユーザーAが作成したタスクが表示される' do
@@ -25,11 +25,11 @@ describe 'Discuss管理機能', type: :system do
     context 'Negativeな会議を作成できる' do
       before do
         visit root_path
-        fill_in 'Meeting Name', with: '会議A'
-        fill_in 'User Name', with: 'ユーザーA'
-        fill_in 'Agenda', with: 'テーマ1'
+        fill_in 'Please input the meeting name...', with: '会議A'
+        fill_in 'Please input your name...', with: 'ユーザーA'
+        fill_in 'Please input the first agenda...', with: 'テーマ1'
         choose  'Negative'
-        click_button 'create'
+        click_button 'Start'
       end
 
       it 'ユーザーAが作成したタスクが表示される' do
@@ -41,10 +41,10 @@ describe 'Discuss管理機能', type: :system do
     context 'Meeting Name不足の会議' do
       before do
         visit root_path
-        fill_in 'User Name', with: 'ユーザーA'
-        fill_in 'Agenda', with: 'テーマ1'
+        fill_in 'Please input your name...', with: 'ユーザーA'
+        fill_in 'Please input the first agenda...', with: 'テーマ1'
         choose  'Negative'
-        click_button 'create'
+        click_button 'Start'
       end
 
       it '会議を作成できない' do
@@ -55,10 +55,10 @@ describe 'Discuss管理機能', type: :system do
     context 'User Name不足の会議' do
       before do
         visit root_path
-        fill_in 'Meeting Name', with: '会議A'
-        fill_in 'Agenda', with: 'テーマ1'
+        fill_in 'Please input the meeting name...', with: '会議A'
+        fill_in 'Please input the first agenda...', with: 'テーマ1'
         choose  'Negative'
-        click_button 'create'
+        click_button 'Start'
       end
 
       it '会議を作成できない' do
@@ -69,10 +69,10 @@ describe 'Discuss管理機能', type: :system do
     context 'Agenda不足の会議' do
       before do
         visit root_path
-        fill_in 'Meeting Name', with: '会議A'
-        fill_in 'User Name', with: 'ユーザーA'
+        fill_in 'Please input the meeting name...', with: '会議A'
+        fill_in 'Please input your name...', with: 'ユーザーA'
         choose  'Negative'
-        click_button 'create'
+        click_button 'Start'
       end
 
       it '会議を作成できない' do
@@ -83,10 +83,10 @@ describe 'Discuss管理機能', type: :system do
     context 'Opinion不足の会議' do
       before do
         visit root_path
-        fill_in 'Meeting Name', with: '会議A'
-        fill_in 'User Name', with: 'ユーザーA'
-        fill_in 'Agenda', with: 'テーマ1'
-        click_button 'create'
+        fill_in 'Please input the meeting name...', with: '会議A'
+        fill_in 'Please input your name...', with: 'ユーザーA'
+        fill_in 'Please input the first agenda...', with: 'テーマ1'
+        click_button 'Start'
       end
 
       it '会議を作成できない' do
