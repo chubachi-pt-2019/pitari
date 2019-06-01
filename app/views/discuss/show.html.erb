@@ -64,7 +64,7 @@
         <ul id="users-list">
         <%= hidden_field_tag :currentUserId, @user_id %>
             <% @discuss.users.each do |user| %>
-                <li>
+                <li id = "user-<%= user.id %>" >
                 <div class="col-sm-2 full-height">
                     <span><%= user.name %></span>
                     <%= image_tag("sarariman.svg")%>
@@ -83,9 +83,6 @@
                 </li>
             <% end %>
         </ul>
-        <div class="col-sm-12 my-3">
-        <%= button_tag "understand", class: "btn btn-danger col-sm-4 col-sm-offset-4", id: "understand"%>
-    </div>
     </div>
 </div>
 
